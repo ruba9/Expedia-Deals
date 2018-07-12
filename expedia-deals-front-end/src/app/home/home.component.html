@@ -1,0 +1,81 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> Expedia Deals
+  </a>
+</nav>
+<div class="mt-5"> </div>
+<div class="container">
+
+    <form [formGroup]="myForm" novalidate (ngSubmit)="onSubmit()">
+
+        <div class="row">
+          <div class="col-md-4 col-sm-6 col-xs-6 form-group ">
+
+            <label>Destination
+              <label style="color: red">*</label>
+            </label>
+            <input type="text" class="form-control"  formControlName="destination" name="name"  placeholder=""
+              required>
+
+          </div>
+          <div class="col-md-4 col-sm-6 col-xs-6 form-group ">
+
+              <label>Start Date
+         
+              </label>
+              <input type="date" class="form-control"  formControlName="startDate" name="name"  placeholder=""
+                required>
+  
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6 form-group ">
+
+                <label>End Date
+                
+                </label>
+                <input type="date" class="form-control"  formControlName="endDate" name="name"  placeholder=""
+                  required>
+    
+              </div>
+       
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6 form-group ">
+            <label>Price</label>
+            <input type="number"  formControlName="pricePerUser" class="form-control " name="pricePerUser" id="inputSuccess2"
+              placeholder="" required>
+              
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6 form-group ">
+            <label> Nmber of travelers</label>
+            <input type="number"  formControlName="maxUsers" class="form-control" name="maxUsers" id="inputSuccess2"
+              placeholder="" required>
+
+          </div>
+
+        </div>
+    
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 text-center ">
+            <input type="submit" name="add" class="btn  btn-primary" value="Filter">
+          </div>
+        </div>
+        <!-- <div class="col-md-12">
+            <div class="">
+              <h5>Field Values</h5>
+              <pre>{{ myForm.value | json }}</pre>
+            </div>
+          </div> -->
+      </form>
+
+  <div *ngFor="let deal of hotelDealsList" class="card mt-5" style="width: 100%;">
+    <img class="card-img-top hotel-image"  src="{{deal.hotelImageUrl}}" alt="{{deal.hotelName}}">
+    <span>Hotel Rating: {{deal.hotelStarRating}}</span>
+    <div class="card-body">
+      <h5 class="card-title"> {{deal.hotelName}} </h5>
+      <h3 class="card-text">{{deal.hotelCity}}</h3>
+      <h4 style="text-decoration:line-through">{{deal.originalPricePerNight}} </h4> <h3> {{deal.totalPrice}} {{deal.priceCurrency}}</h3>
+      <p class="card-text"></p>
+      <a href="#" class="btn btn-primary">Enter</a>
+    </div>
+  </div>
+</div>
