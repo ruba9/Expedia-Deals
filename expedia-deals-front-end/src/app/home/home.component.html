@@ -23,7 +23,7 @@
               <label>Start Date
          
               </label>
-              <input type="date" class="form-control"  formControlName="startDate" name="name"  placeholder=""
+              <input type="date" class="form-control"  formControlName="minTripStartDate" name="minTripStartDate"  placeholder=""
                 required>
   
             </div>
@@ -32,22 +32,23 @@
                 <label>End Date
                 
                 </label>
-                <input type="date" class="form-control"  formControlName="endDate" name="name"  placeholder=""
+                <input type="date" class="form-control"  formControlName="maxTripStartDate" name="name"  placeholder=""
                   required>
     
               </div>
        
         </div>
         <div class="row">
-          <div class="col-md-6 col-sm-6 col-xs-6 form-group ">
-            <label>Price</label>
-            <input type="number"  formControlName="pricePerUser" class="form-control " name="pricePerUser" id="inputSuccess2"
+         
+          <div class="col-md-4 col-sm-6 col-xs-6 form-group ">
+            <label> Min Hotel Stars</label>
+            <input type="number"  formControlName="minStarRating" class="form-control" name="minStarRating" id="inputSuccess2"
               placeholder="" required>
-              
+
           </div>
-          <div class="col-md-6 col-sm-6 col-xs-6 form-group ">
-            <label> Nmber of travelers</label>
-            <input type="number"  formControlName="maxUsers" class="form-control" name="maxUsers" id="inputSuccess2"
+          <div class="col-md-4 col-sm-6 col-xs-6 form-group ">
+            <label> Max Hotel Stars</label>
+            <input type="number"  formControlName="maxStarRating" class="form-control" name="maxStarRating" id="inputSuccess2"
               placeholder="" required>
 
           </div>
