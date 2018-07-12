@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var url = require('url');
 var axios = require('axios');
-var deals = require('./api-deals');
+
 
 var cleanDeals =function (req, res, next) {
     var url_parts = url.parse(req.url, true)
