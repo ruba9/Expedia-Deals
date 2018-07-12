@@ -17,61 +17,78 @@ export class HomeComponent implements OnInit {
   destination = ""
   minTripStartDate = ""
   maxTripStartDate = ""
-  minStarRating=""
-  maxStarRating=""
-  expediaUrl=""
+  minStarRating = ""
+  maxStarRating = ""
+  minTotalRate = ""
+  maxTotalRate = ""
+  expediaUrl = ""
   constructor(private _fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    // we have to write a code that get all parameters and insrt them to form contoller
-    // this.activatedRoute.queryParams.subscribe((params: Params) => {
-    //   this.destination = params['destination'] || "";
+  
 
-    // });
+   
+      this.myForm = this._fb.group({
+        'destination': ['', Validators.required],
+        'minTripStartDate': [],
+        'maxTripStartDate': [],
+        'minStarRating': [],
+        'maxStarRating': [],
+        'minTotalRate' : [],
+        'maxTotalRate' : [],
+      });
+      this.refreshData()
     
 
-    this.myForm = this._fb.group({
-      'destination': ['', Validators.required],
-      'minTripStartDate': [],
-      'maxTripStartDate': [],
-      'minStarRating': [],
-      'maxStarRating': []
-    });
-    axios.get('https://hotel-deals-exp.herokuapp.com/deals')
-      .then(response => {
-        this.hotelDealsList = response.data
-        console.log(this.hotelDealsList)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+
   }
-  onSubmit() {
-    
-    this.router.navigate(['/'], { queryParams: { destination: this.myForm.controls['destination'].value, minTripStartDate: this.myForm.controls['minTripStartDate'].value, maxTripStartDate: this.myForm.controls['maxTripStartDate'].value, minStarRating: this.myForm.controls['minStarRating'].value, maxStarRating: this.myForm.controls['maxStarRating'].value } });
+
+  refreshData() {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.destination = params['destination'] || "";
       this.minTripStartDate = params['minTripStartDate'] || "";
       this.maxTripStartDate = params['maxTripStartDate'] || "";
-      this.minStarRating= params['minStarRating'] || "";
-      this.maxStarRating=params['maxStarRating'] || "";
-      this.expediaUrl= `https://ex-deals.herokuapp.com/deals?&destination=${this.destination}&minTripStartDate=${this.minTripStartDate}&maxTripStartDate=${this.maxTripStartDate}&minStarRating=${this.minStarRating}&maxStarRating=${this.maxStarRating}`
-      console.log(this.expediaUrl)
-      console.log(this.destination)
-      console.log(this.minTripStartDate)
-      console.log(this.maxTripStartDate)
-      console.log(this.minStarRating)
-      console.log(this.maxStarRating)
-    });
-    //expediaUrl= 
-    // if (this.myForm.controls['destination']) {
-    //   expediaUrl = expediaUrl + `?&destination=${this.myForm.controls['destination'].value}`
+      this.minStarRating = params['minStarRating'] || "";
+      this.maxStarRating = params['maxStarRating'] || "";
+      this.minTotalRate = params['minTotalRate'] || "";
+      this.maxTotalRate = params['maxTotalRate'] || "";
+      this.expediaUrl = `https://ex-deals.herokuapp.com/deals?&destination=${this.destination}&minTripStartDate=${this.minTripStartDate}&maxTripStartDate=${this.maxTripStartDate}&minStarRating=${this.minStarRating}&maxStarRating=${this.maxStarRating}&minTotalRate=${this.minTotalRate}&maxTotalRate=${this.maxTotalRate}`
+      this.myForm = this._fb.group({
+        'destination': [this.destination, Validators.required],
+        'minTripStartDate': this.minTripStartDate,
+        'maxTripStartDate': this.maxTripStartDate,
+        'minStarRating': this.minStarRating,
+        'maxStarRating': this.maxStarRating,
+        'minTotalRate' : this.minTotalRate,
+        'maxTotalRate' : this.maxTotalRate,
 
-    // } else if (this.myForm.controls['startDate']) {
-    //   expediaUrl = expediaUrl + `?&startDate=${this.myForm.controls['startDate'].value}`
-    // }
+      });
+    });
+
     axios.get(this.expediaUrl)
       .then(response => {
+        this.hotelDealsList = response.data;
+        console.log(this.hotelDealsList)
+      }).catch(error => console.log(error))
+  }
+  async onSubmit() {
+
+    await this.router.navigate(['/'], { queryParams: { destination: this.myForm.controls['destination'].value, minTripStartDate: this.myForm.controls['minTripStartDate'].value, maxTripStartDate: this.myForm.controls['maxTripStartDate'].value, minStarRating: this.myForm.controls['minStarRating'].value, maxStarRating: this.myForm.controls['maxStarRating'].value,minTotalRate: this.myForm.controls['minTotalRate'].value,maxTotalRate: this.myForm.controls['maxTotalRate'].value  } });
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.destination = params['destination'] || "";
+      this.minTripStartDate = params['minTripStartDate'] || "";
+      this.maxTripStartDate = params['maxTripStartDate'] || "";
+      this.minStarRating = params['minStarRating'] || "";
+      this.maxStarRating = params['maxStarRating'] || "";
+      this.minTotalRate = params['minTotalRate'] || "";
+      this.maxTotalRate = params['maxTotalRate'] || "";
+      this.expediaUrl = `https://ex-deals.herokuapp.com/deals?&destination=${this.destination}&minTripStartDate=${this.minTripStartDate}&maxTripStartDate=${this.maxTripStartDate}&minStarRating=${this.minStarRating}&maxStarRating=${this.maxStarRating}&minTotalRate=${this.minTotalRate}&maxTotalRate=${this.maxTotalRate}`
+  
+    });
+
+    axios.get(this.expediaUrl)
+      .then(response => {
+     
         this.hotelDealsList = response.data;
         console.log(this.hotelDealsList)
       }).catch(error => console.log(error))

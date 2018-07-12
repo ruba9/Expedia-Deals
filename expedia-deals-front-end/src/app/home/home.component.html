@@ -40,15 +40,29 @@
         </div>
         <div class="row">
          
-          <div class="col-md-4 col-sm-6 col-xs-6 form-group ">
+          <div class="col-md-3 col-sm-6 col-xs-6 form-group ">
             <label> Min Hotel Stars</label>
             <input type="number"  formControlName="minStarRating" class="form-control" name="minStarRating" id="inputSuccess2"
               placeholder="" required>
 
           </div>
-          <div class="col-md-4 col-sm-6 col-xs-6 form-group ">
+          <div class="col-md-3 col-sm-6 col-xs-6 form-group ">
             <label> Max Hotel Stars</label>
             <input type="number"  formControlName="maxStarRating" class="form-control" name="maxStarRating" id="inputSuccess2"
+              placeholder="" required>
+
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-6 form-group ">
+            <label> Min Total Rate</label>
+            <input type="number"  formControlName="minTotalRate" class="form-control" name="minTotalRate" id="inputSuccess2"
+              placeholder="" required>
+
+          </div>
+
+          <div class="col-md-3 col-sm-6 col-xs-6 form-group ">
+            <label> Max Total Rate</label>
+            <input type="number"  formControlName="maxTotalRate" class="form-control" name="maxTotalRate" id="inputSuccess2"
               placeholder="" required>
 
           </div>
@@ -67,7 +81,7 @@
             </div>
           </div> -->
       </form>
-
+     
   <div *ngFor="let deal of hotelDealsList" class="card mt-5" style="width: 100%;">
     <img class="card-img-top hotel-image"  src="{{deal.hotelImageUrl}}" alt="{{deal.hotelName}}">
     <span>Hotel Rating: {{deal.hotelStarRating}}</span>
@@ -76,7 +90,7 @@
       <h3 class="card-text">{{deal.hotelCity}}</h3>
       <h4 style="text-decoration:line-through">{{deal.originalPricePerNight}} </h4> <h3> {{deal.totalPrice}} {{deal.priceCurrency}}</h3>
       <p class="card-text"></p>
-      <a href="#" class="btn btn-primary">Enter</a>
+
     </div>
   </div>
 </div>
